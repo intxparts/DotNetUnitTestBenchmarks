@@ -15,4 +15,8 @@
     <ProjectReference Include="..\Library\Library.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="moq" Version="4.15.2" />
+  </ItemGroup>
+
 </Project>
