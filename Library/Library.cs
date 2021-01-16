@@ -53,16 +53,17 @@ namespace Library
 	public interface ILicenseService
 	{
 		void LoadLicense();
-		bool HasLicenseModule(LicenseModules module);
+		HashSet<LicenseModules> Modules { get; }
 	}
 
 	public class LicenseService : ILicenseService
 	{
-		private HashSet<LicenseModules> _licenseModules;
-		
+		private HashSet<LicenseModules> _modules;
+		public HashSet<LicenseModules> Modules => _modules;
+
 		public LicenseService()
 		{
-			_licenseModules = new HashSet<LicenseModules>();
+			_modules = new HashSet<LicenseModules>();
 		}
 
 		public void LoadLicense()
@@ -82,48 +83,43 @@ namespace Library
 			{
 				switch (s)
 				{
-					case "MODULE1": _licenseModules.Add(LicenseModules.MODULE1); break;
-					case "MODULE2": _licenseModules.Add(LicenseModules.MODULE2); break;
-					case "MODULE3": _licenseModules.Add(LicenseModules.MODULE3); break;
-					case "MODULE4": _licenseModules.Add(LicenseModules.MODULE4); break;
-					case "MODULE5": _licenseModules.Add(LicenseModules.MODULE5); break;
-					case "MODULE6": _licenseModules.Add(LicenseModules.MODULE6); break;
-					case "MODULE7": _licenseModules.Add(LicenseModules.MODULE7); break;
-					case "MODULE8": _licenseModules.Add(LicenseModules.MODULE8); break;
-					case "MODULE9": _licenseModules.Add(LicenseModules.MODULE9); break;
-					case "MODULE10": _licenseModules.Add(LicenseModules.MODULE10); break;
+					case "MODULE1": _modules.Add(LicenseModules.MODULE1); break;
+					case "MODULE2": _modules.Add(LicenseModules.MODULE2); break;
+					case "MODULE3": _modules.Add(LicenseModules.MODULE3); break;
+					case "MODULE4": _modules.Add(LicenseModules.MODULE4); break;
+					case "MODULE5": _modules.Add(LicenseModules.MODULE5); break;
+					case "MODULE6": _modules.Add(LicenseModules.MODULE6); break;
+					case "MODULE7": _modules.Add(LicenseModules.MODULE7); break;
+					case "MODULE8": _modules.Add(LicenseModules.MODULE8); break;
+					case "MODULE9": _modules.Add(LicenseModules.MODULE9); break;
+					case "MODULE10": _modules.Add(LicenseModules.MODULE10); break;
 				}
 			}
-		}
-
-		public bool HasLicenseModule(LicenseModules module)
-		{
-			return _licenseModules.Contains(module);
 		}
 	}
 
 	public enum LicenseControlledFeatures
 	{
-		FEATURE1,
-		FEATURE2,
-		FEATURE3,
-		FEATURE4,
-		FEATURE5,
-		FEATURE6,
-		FEATURE7,
-		FEATURE8,
-		FEATURE9,
-		FEATURE10,
-		FEATURE11,
-		FEATURE12,
-		FEATURE13,
-		FEATURE14,
-		FEATURE15,
-		FEATURE16,
-		FEATURE17,
-		FEATURE18,
-		FEATURE19,
-		FEATURE20
+		FEATURE1 = 0,
+		FEATURE2 = 1,
+		FEATURE3 = 2,
+		FEATURE4 = 3,
+		FEATURE5 = 4,
+		FEATURE6 = 5,
+		FEATURE7 = 6,
+		FEATURE8 = 7,
+		FEATURE9 = 8,
+		FEATURE10 = 9,
+		FEATURE11 = 10,
+		FEATURE12 = 11,
+		FEATURE13 = 12,
+		FEATURE14 = 13,
+		FEATURE15 = 14,
+		FEATURE16 = 15,
+		FEATURE17 = 16,
+		FEATURE18 = 17,
+		FEATURE19 = 18,
+		FEATURE20 = 19
 	}
 
 	public interface IAuthorizationService : IServiceWithDependencies
@@ -148,7 +144,7 @@ namespace Library
 
 		public void SetLicenseControlledFeatures()
 		{
-			if (_licenseService.HasLicenseModule(LicenseModules.MODULE1))
+			if (_licenseService.Modules.Contains(LicenseModules.MODULE1))
 			{
 				AddLicenseControlledFeature(LicenseControlledFeatures.FEATURE1);
 				AddLicenseControlledFeature(LicenseControlledFeatures.FEATURE2);
@@ -159,7 +155,7 @@ namespace Library
 				AddLicenseControlledFeature(LicenseControlledFeatures.FEATURE7);
 			}
 
-			if (_licenseService.HasLicenseModule(LicenseModules.MODULE2))
+			if (_licenseService.Modules.Contains(LicenseModules.MODULE2))
 			{
 				AddLicenseControlledFeature(LicenseControlledFeatures.FEATURE8);
 				AddLicenseControlledFeature(LicenseControlledFeatures.FEATURE9);
@@ -167,7 +163,7 @@ namespace Library
 				AddLicenseControlledFeature(LicenseControlledFeatures.FEATURE11);
 			}
 
-			if (_licenseService.HasLicenseModule(LicenseModules.MODULE3))
+			if (_licenseService.Modules.Contains(LicenseModules.MODULE3))
 			{
 				AddLicenseControlledFeature(LicenseControlledFeatures.FEATURE12);
 			}
